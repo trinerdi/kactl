@@ -6,7 +6,30 @@
 
 import sys
 import getopt
+import hashlib
+import re
 
+def checksum(line):
+	numchars = 3
+	line.strip()
+	if len(line) == 0: # Print nothing for an empty line
+		return ""
+
+	line = re.sub(r"\s*", r"", line)
+	line = re.sub(r"//.*", r"", line)
+	print line
+	if len(line) == 0: # Indent a comment-only line properly
+	   return " " * numchars
+
+	return hashlib.md5(bytes(line + "\n")).hexdigest()[:numchars]
+
+
+def addlinehashes(text):
+	text = text.split("\n")
+	l = []
+	for a in text:
+		l.append(checksum(a) + " " + a)
+	return "\n".join(l)
 
 def escape(input):
 	input = input.replace('<','\\ensuremath{<}')
@@ -143,7 +166,7 @@ def processwithcomments(caption, instream, outstream, listingslang = None):
 		if listingslang is not None:
 			print >> outstream, ", language="+listingslang,
 		print >> outstream, "]"
-		print >> outstream, nsource
+		print >> outstream, addlinehashes(nsource)
 		print >> outstream, "\\end{lstlisting}"
 
 def processraw(caption, instream, outstream, listingslang = 'raw'):
@@ -152,7 +175,7 @@ def processraw(caption, instream, outstream, listingslang = 'raw'):
 		print_title(caption, outstream)
 		print >> outstream, "\\rightcaption{",str(linecount(source))," lines}"
 		print >> outstream, "\\begin{lstlisting}[language="+listingslang+",caption={",pathescape(caption),"}]"
-		print >> outstream, source
+		print >> outstream, addlinehashes(source)
 		print >> outstream, "\\end{lstlisting}"
 	except:
 		print >> outstream, "\kactlerror{Could not read source.}"
