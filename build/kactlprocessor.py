@@ -17,7 +17,6 @@ def checksum(line):
 
 	line = re.sub(r"\s*", r"", line)
 	line = re.sub(r"//.*", r"", line)
-	print line
 	if len(line) == 0: # Indent a comment-only line properly
 	   return " " * numchars
 
