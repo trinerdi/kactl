@@ -23,8 +23,8 @@ struct RMQ {
 	vector<vector<T>> jmp;
 
 	RMQ(const vector<T>& V) {
-		int N = sz(V), on = 1, depth = 1;
-		while (on < sz(V)) on *= 2, depth++;
+		int N = V.size(), on = 1, depth = 1;
+		while (on < V.size()) on *= 2, depth++;
 		jmp.assign(depth, V);
 		rep(i,0,depth-1) rep(j,0,N)
 			jmp[i+1][j] = min(jmp[i][j],

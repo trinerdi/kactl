@@ -21,18 +21,18 @@ bool bellmanFord2(Graph& g, int start_node) {
 	for(auto& n : g.nodes) { n.dist = inf; n.prev = -1; }
 	g.nodes[start_node].dist = 0;
 
-	rep(i,0,sz(g.nodes)) for(auto& e : g.edges) {
+	rep(i,0,g.nodes.size()) for(auto& e : g.edges) {
 		Node& cur = g.nodes[e.src];
 		Node& dest = g.nodes[e.dest];
 		if (cur.dist == inf) continue;
 		T ndist = cur.dist + (cur.dist == -inf ? 0 : e.weight);
 		if (ndist < dest.dist) {
 			dest.prev = e.src;
-			dest.dist = (i >= sz(g.nodes)-1 ? -inf : ndist);
+			dest.dist = (i >= g.nodes.size()-1 ? -inf : ndist);
 		}
 	}
 	bool ret = 0;
-	rep(i,0,sz(g.nodes)) for(auto& e : g.edges) {
+	rep(i,0,g.nodes.size()) for(auto& e : g.edges) {
 		if (g.nodes[e.src].dist == -inf)
 			g.nodes[e.dest].dist = -inf, ret = 1;
 	}

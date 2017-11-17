@@ -35,11 +35,11 @@ vector<double> x = tridiagonal(diag, super, sub, b);
 template <class T>
 vector<T> tridiagonal(vector<T> diag, const vector<T>& super,
 		const vector<T>& sub, vector<T> b) {
-	rep(i,0,sz(b)-1) {
+	rep(i,0,b.size()-1) {
 		diag[i+1] -= super[i]*sub[i]/diag[i];
 		b[i+1] -= b[i]*sub[i]/diag[i];
 	}
-	for (int i = sz(b); --i > 0;) {
+	for (int i = b.size(); --i > 0;) {
 		b[i] /= diag[i];
 		b[i-1] -= b[i]*super[i-1];
 	}

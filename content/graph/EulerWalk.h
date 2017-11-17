@@ -17,7 +17,7 @@ struct V {
 
 vi euler_walk(vector<V>& nodes, int nedges, int src=0) {
 	int c = 0;
-	for(auto& n : nodes) c += abs(n.nins - sz(n.outs));
+	for(auto& n : nodes) c += abs(n.nins - n.outs.size());
 	if (c > 2) return {};
 	vector<vector<pii>::iterator> its;
 	for(auto& n : nodes)
@@ -31,7 +31,7 @@ vi euler_walk(vector<V>& nodes, int nedges, int src=0) {
 		if(it == end) { ret.push_back(x); s.pop_back(); }
 		else { s.push_back(it->first); eu[it->second] = true; }
 	}
-	if(sz(ret) != nedges+1)
+	if(ret.size() != nedges+1)
 		ret.clear(); // No Eulerian cycles/paths.
 	// else, non-cycle if ret.front() != ret.back()
 	reverse(ret.begin(), ret.end());

@@ -18,7 +18,7 @@
 
 typedef valarray<complex<double> > carray;
 void fft(carray& x, carray& roots) {
-	int N = sz(x);
+	int N = x.size();
 	if (N <= 1) return;
 	carray even = x[slice(0, N/2, 2)];
 	carray odd = x[slice(1, N/2, 2)];
@@ -34,7 +34,7 @@ void fft(carray& x, carray& roots) {
 
 typedef vector<double> vd;
 vd conv(const vd& a, const vd& b) {
-	int s = sz(a) + sz(b) - 1, L = 32-__builtin_clz(s), n = 1<<L;
+	int s = a.size() + b.size() - 1, L = 32-__builtin_clz(s), n = 1<<L;
 	if (s <= 0) return {};
 	carray av(n), bv(n), roots(n);
 	rep(i,0,n) roots[i] = polar(1.0, -2 * M_PI * i / n);

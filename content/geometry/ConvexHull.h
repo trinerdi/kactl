@@ -25,11 +25,11 @@ Points on the edge of the hull between two other points are not considered part 
 
 typedef Point<ll> P;
 pair<vi, vi> ulHull(const vector<P>& S) {
-	vi Q(sz(S)), U, L;
+	vi Q(S.size()), U, L;
 	iota(Q.begin(), Q.end(), 0);
 	sort(Q.begin(), Q.end(), [&S](int a, int b){ return S[a] < S[b]; });
 	for(auto& it : Q) {
-#define ADDP(C, cmp) while (sz(C) > 1 && S[C[sz(C)-2]].cross(\
+#define ADDP(C, cmp) while (C.size() > 1 && S[C[C.size()-2]].cross(\
 	S[it], S[C.back()]) cmp 0) C.pop_back(); C.push_back(it);
 		ADDP(U, <=); ADDP(L, >=);
 	}   
@@ -38,7 +38,7 @@ pair<vi, vi> ulHull(const vector<P>& S) {
 
 vi convexHull(const vector<P>& S) {
 	vi u, l; tie(u, l) = ulHull(S);
-	if (sz(S) <= 1) return u;
+	if (S.size() <= 1) return u;
 	if (S[u[0]] == S[u[1]]) return {0};
 	l.insert(l.end(), u.rbegin()+1, u.rend()-1);
 	return l;

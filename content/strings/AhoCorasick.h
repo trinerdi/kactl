@@ -29,7 +29,7 @@ struct AhoCorasick {
 		int n = 0;
 		for(auto& c : s) {
 			int& m = N[n].next[c - first];
-			if (m == -1) { n = m = sz(N); N.emplace_back(-1); }
+			if (m == -1) { n = m = N.size(); N.emplace_back(-1); }
 			else n = m;
 		}
 		if (N[n].end == -1) N[n].start = j;
@@ -39,8 +39,8 @@ struct AhoCorasick {
 	}
 	AhoCorasick(vector<string>& pat) {
 		N.emplace_back(-1);
-		rep(i,0,sz(pat)) insert(pat[i], i);
-		N[0].back = sz(N);
+		rep(i,0,pat.size()) insert(pat[i], i);
+		N[0].back = N.size();
 		N.emplace_back(0);
 
 		queue<int> q;
@@ -71,11 +71,11 @@ struct AhoCorasick {
 	}
 	vector<vi> findAll(vector<string>& pat, string word) {
 		vi r = find(word);
-		vector<vi> res(sz(word));
-		rep(i,0,sz(word)) {
+		vector<vi> res(word.size());
+		rep(i,0,word.size()) {
 			int ind = r[i];
 			while (ind != -1) {
-				res[i - sz(pat[ind]) + 1].push_back(ind);
+				res[i - pat[ind].size() + 1].push_back(ind);
 				ind = backp[ind];
 			}
 		}

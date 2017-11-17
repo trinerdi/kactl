@@ -15,20 +15,20 @@
 #include "LCA.h"
 
 vpi compressTree(LCA& lca, const vi& subset) {
-	static vi rev; rev.resize(sz(lca.dist));
+	static vi rev; rev.resize(lca.dist.size());
 	vi li = subset, &T = lca.time;
 	auto cmp = [&](int a, int b) { return T[a] < T[b]; };
 	sort(li.begin(), li.end(), cmp);
-	int m = sz(li)-1;
+	int m = li.size()-1;
 	rep(i,0,m) {
 		int a = li[i], b = li[i+1];
 		li.push_back(lca.query(a, b));
 	}
 	sort(li.begin(), li.end(), cmp);
 	li.erase(unique(li.begin(), li.end()), li.end());
-	rep(i,0,sz(li)) rev[li[i]] = i;
+	rep(i,0,li.size()) rev[li[i]] = i;
 	vpi ret = {pii(0, li[0])};
-	rep(i,0,sz(li)-1) {
+	rep(i,0,li.size()-1) {
 		int a = li[i], b = li[i+1];
 		ret.emplace_back(rev[lca.query(a, b)], b);
 	}

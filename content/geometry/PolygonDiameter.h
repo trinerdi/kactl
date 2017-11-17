@@ -12,10 +12,10 @@
 
 vector<pii> antipodal(const vector<P>& S, vi& U, vi& L) {
 	vector<pii> ret;
-	int i = 0, j = sz(L) - 1;
-	while (i < sz(U) - 1 || j > 0) {
+	int i = 0, j = L.size() - 1;
+	while (i < U.size() - 1 || j > 0) {
 		ret.emplace_back(U[i], L[j]);
-		if (j == 0 || (i != sz(U)-1 && (S[L[j]] - S[L[j-1]])
+		if (j == 0 || (i != U.size()-1 && (S[L[j]] - S[L[j-1]])
 					.cross(S[U[i+1]] - S[U[i]]) > 0)) ++i;
 		else --j;
 	}

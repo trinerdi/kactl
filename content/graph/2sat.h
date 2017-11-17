@@ -37,9 +37,9 @@ struct TwoSat {
 	void set_value(int x) { either(x, x); }
 
 	void at_most_one(const vi& li) { // (optional)
-		if (sz(li) <= 1) return;
+		if (li.size() <= 1) return;
 		int cur = ~li[0];
-		rep(i,2,sz(li)) {
+		rep(i,2,li.size()) {
 			int next = add_var();
 			either(cur, ~li[i]);
 			either(cur, next);

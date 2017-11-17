@@ -24,7 +24,7 @@ int insideHull2(const vector<P>& H, int L, int R, const P& p) {
 		int sb = sideOf(H[L], H[L+1], p);
 		int sc = sideOf(H[L+1], H[0], p);
 		if (sa < 0 || sb < 0 || sc < 0) return 0;
-		if (sb==0 || (sa==0 && L == 1) || (sc == 0 && R == sz(H)))
+		if (sb==0 || (sa==0 && L == 1) || (sc == 0 && R == H.size()))
 			return 1;
 		return 2;
 	}
@@ -35,6 +35,6 @@ int insideHull2(const vector<P>& H, int L, int R, const P& p) {
 }
 
 int insideHull(const vector<P>& hull, const P& p) {
-	if (sz(hull) < 3) return onSegment(hull[0], hull.back(), p);
-	else return insideHull2(hull, 1, sz(hull), p);
+	if (hull.size() < 3) return onSegment(hull[0], hull.back(), p);
+	else return insideHull2(hull, 1, hull.size(), p);
 }

@@ -9,7 +9,7 @@
 #pragma once
 
 void manacher(const string& s) {
-	int n = sz(s);
+	int n = s.size();
 	vi p[2] = {vi(n+1), vi(n)};
 	rep(z,0,2) for (int i=0,l=0,r=0; i < n; i++) {
 		int t = r-i+!z;

@@ -21,7 +21,7 @@ ull f(ull a, ull n, ull &has) {
 }
 vector<ull> factor(ull d) {
 	vector<ull> res;
-	for (int i = 0; i < sz(pr) && pr[i]*pr[i] <= d; i++)
+	for (int i = 0; i < pr.size() && pr[i]*pr[i] <= d; i++)
 		if (d % pr[i] == 0) {
 			while (d % pr[i] == 0) d /= pr[i];
 			res.push_back(pr[i]);

@@ -25,8 +25,8 @@ struct PushRelabel {
 
 	void add_edge(int s, int t, Flow cap, Flow rcap=0) {
 		if (s == t) return;
-		Edge a = {t, sz(g[t]), 0, cap};
-		Edge b = {s, sz(g[s]), 0, rcap};
+		Edge a = {t, g[t].size(), 0, cap};
+		Edge b = {s, g[s].size(), 0, rcap};
 		g[s].push_back(a);
 		g[t].push_back(b);
 	}
@@ -38,7 +38,7 @@ struct PushRelabel {
 		back.f -= f; back.c += f; ec[back.dest] -= f;
 	}
 	Flow maxflow(int s, int t) {
-		int v = sz(g); H[s] = v; ec[t] = 1;
+		int v = g.size(); H[s] = v; ec[t] = 1;
 		vi co(2*v); co[0] = v-1;
 		rep(i,0,v) cur[i] = g[i].data();
 		for(auto& e : g[s]) add_flow(e, e.c);
@@ -47,7 +47,7 @@ struct PushRelabel {
 			while (hs[hi].empty()) if (!hi--) return -ec[s];
 			int u = hs[hi].back(); hs[hi].pop_back();
 			while (ec[u] > 0)  // discharge u
-				if (cur[u] == g[u].data() + sz(g[u])) {
+				if (cur[u] == g[u].data() + g[u].size()) {
 					H[u] = 1e9;
 					for(auto& e : g[u]) if (e.c && H[u] > H[e.dest]+1)
 						H[u] = H[e.dest]+1, cur[u] = &e;
