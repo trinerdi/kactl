@@ -40,8 +40,8 @@ double MinCostMatching(const vector<vd>& cost, vi& L, vi& R) {
 	for (; mated < n; mated++) { // until solution is feasible
 		int s = 0;
 		while (L[s] != -1) s++;
-		fill(all(dad), -1);
-		fill(all(seen), 0);
+		fill(dad.begin(), dad.end(), -1);
+		fill(seen.begin(), seen.end(), 0);
 		rep(k,0,n)
 			dist[k] = cost[s][k] - u[s] - v[k];
 

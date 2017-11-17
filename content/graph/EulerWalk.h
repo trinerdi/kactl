@@ -34,6 +34,6 @@ vi euler_walk(vector<V>& nodes, int nedges, int src=0) {
 	if(sz(ret) != nedges+1)
 		ret.clear(); // No Eulerian cycles/paths.
 	// else, non-cycle if ret.front() != ret.back()
-	reverse(all(ret));
+	reverse(ret.begin(), ret.end());
 	return ret;
 }

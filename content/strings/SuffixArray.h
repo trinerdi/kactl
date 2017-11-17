@@ -48,7 +48,7 @@ struct SuffixArray {
 		int q = 8;
 		while ((1 << q) < N) q++;
 		for (int moc = 0;; moc++) {
-			count_sort(b, q); // sort(all(b)) can be used as well
+			count_sort(b, q); // sort(b.begin(), b.end()) can be used as well
 			a[b[0].second] = 0;
 			rep(i,1,N)
 				a[b[i].second] = a[b[i - 1].second] +

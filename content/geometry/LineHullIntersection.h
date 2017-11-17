@@ -28,7 +28,7 @@ struct HullIntersection {
 	vector<pair<P, int>> a;
 
 	HullIntersection(const vector<P>& ps) : N(sz(ps)), p(ps) {
-		p.insert(p.end(), all(ps));
+		p.insert(p.end(), ps.begin(), ps.end());
 		int b = 0;
 		rep(i,1,N) if (P{p[i].y,p[i].x} < P{p[b].y, p[b].x}) b = i;
 		rep(i,0,N) {

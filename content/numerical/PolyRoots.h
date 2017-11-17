@@ -20,7 +20,7 @@ void poly_roots(const Polynomial& p, double xmin, double xmax, vector<double>& r
 		poly_roots(d, xmin, xmax, dr);
 		dr.push_back(xmin-1);
 		dr.push_back(xmax+1);
-		sort(all(dr));
+		sort(dr.begin(), dr.end());
 		for (auto i = dr.begin(), j = i++; i != dr.end(); j = i++){
 			double l = *j, h = *i, m, f;
 			bool sign = p(l) > 0;

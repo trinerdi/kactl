@@ -15,7 +15,7 @@ template<class T> T edmondsKarp(vector<unordered_map<int, T>>& graph, int source
 	vi par(sz(graph)), q = par;
 
 	for (;;) {
-		fill(all(par), -1);
+		fill(par.begin(), par.end(), -1);
 		par[source] = 0;
 		int ptr = 1;
 		q[0] = source;
