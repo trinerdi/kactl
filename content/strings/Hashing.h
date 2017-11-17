@@ -50,6 +50,6 @@ vector<H> getHashes(string& str, int length) {
 
 H hashString(string& s) {
 	K h = 0;
-	trav(c, s) h = h * C + c;
+	for(auto& c : s) h = h * C + c;
 	return h - 0;
 }

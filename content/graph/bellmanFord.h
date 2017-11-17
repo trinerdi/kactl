@@ -18,10 +18,10 @@ struct Graph { vector<Node> nodes; vector<Edge> edges; };
 
 const T inf = numeric_limits<T>::max();
 bool bellmanFord2(Graph& g, int start_node) {
-	trav(n, g.nodes) { n.dist = inf; n.prev = -1; }
+	for(auto& n : g.nodes) { n.dist = inf; n.prev = -1; }
 	g.nodes[start_node].dist = 0;
 
-	rep(i,0,sz(g.nodes)) trav(e, g.edges) {
+	rep(i,0,sz(g.nodes)) for(auto& e : g.edges) {
 		Node& cur = g.nodes[e.src];
 		Node& dest = g.nodes[e.dest];
 		if (cur.dist == inf) continue;
@@ -32,7 +32,7 @@ bool bellmanFord2(Graph& g, int start_node) {
 		}
 	}
 	bool ret = 0;
-	rep(i,0,sz(g.nodes)) trav(e, g.edges) {
+	rep(i,0,sz(g.nodes)) for(auto& e : g.edges) {
 		if (g.nodes[e.src].dist == -inf)
 			g.nodes[e.dest].dist = -inf, ret = 1;
 	}

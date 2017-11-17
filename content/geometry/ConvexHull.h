@@ -16,7 +16,7 @@ Points on the edge of the hull between two other points are not considered part 
  * Status: tested with Kattis problems convexhull
  * Usage:
  * 	vector<P> ps, hull;
- *  trav(i, convexHull(ps)) hull.push_back(ps[i]);
+ *  for(auto& i : convexHull(ps)) hull.push_back(ps[i]);
  * Time: O(n \log n)
 */
 #pragma once
@@ -28,7 +28,7 @@ pair<vi, vi> ulHull(const vector<P>& S) {
 	vi Q(sz(S)), U, L;
 	iota(Q.begin(), Q.end(), 0);
 	sort(Q.begin(), Q.end(), [&S](int a, int b){ return S[a] < S[b]; });
-	trav(it, Q) {
+	for(auto& it : Q) {
 #define ADDP(C, cmp) while (sz(C) > 1 && S[C[sz(C)-2]].cross(\
 	S[it], S[C.back()]) cmp 0) C.pop_back(); C.push_back(it);
 		ADDP(U, <=); ADDP(L, >=);

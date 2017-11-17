@@ -17,10 +17,10 @@ struct V {
 
 vi euler_walk(vector<V>& nodes, int nedges, int src=0) {
 	int c = 0;
-	trav(n, nodes) c += abs(n.nins - sz(n.outs));
+	for(auto& n : nodes) c += abs(n.nins - sz(n.outs));
 	if (c > 2) return {};
 	vector<vector<pii>::iterator> its;
-	trav(n, nodes)
+	for(auto& n : nodes)
 		its.push_back(n.outs.begin());
 	vector<bool> eu(nedges);
 	vi ret, s = {src};

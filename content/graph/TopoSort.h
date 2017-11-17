@@ -14,7 +14,7 @@ template <class E, class I>
 bool topo_sort(const E &edges, I &idx, int n) {
 	vi indeg(n);
 	rep(i,0,n)
-		trav(e, edges[i])
+		for(auto& e : edges[i])
 			indeg[e]++;
 	queue<int> q; // use priority queue for lexic. smallest ans.
 	rep(i,0,n) if (indeg[i] == 0) q.push(-i);
@@ -23,7 +23,7 @@ bool topo_sort(const E &edges, I &idx, int n) {
 		int i = -q.front(); // top() for priority queue
 		idx[i] = nr++;
 		q.pop();
-		trav(e, edges[i])
+		for(auto& e : edges[i])
 			if (--indeg[e] == 0) q.push(-e);
 	}
 	return nr == n;

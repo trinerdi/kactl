@@ -52,7 +52,7 @@ struct TwoSat {
 	vi val, comp, z; int time = 0;
 	int dfs(int i) {
 		int low = val[i] = ++time, x; z.push_back(i);
-		trav(e, gr[i]) if (!comp[e])
+		for(auto& e : gr[i]) if (!comp[e])
 			low = min(low, val[e] ?: dfs(e));
 		++time;
 		if (low == val[i]) do {

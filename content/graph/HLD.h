@@ -39,7 +39,7 @@ struct HLD {
 
 	HLD(vector<vpi>& g) : V(sz(g)) {
 		dfs(0, -1, g, 0);
-		trav(c, C){
+		for(auto& c : C){
 			c.tree.init(sz(c.nodes), 0);
 			for (int ni : c.nodes)
 				c.tree.update(V[ni].pos, V[ni].val);
@@ -93,7 +93,7 @@ struct HLD {
 		V[at].d = d; V[at].par = par;
 		int sum = 1, ch, nod, sz;
 		tuple<int,int,int> mx(-1,-1,-1);
-		trav(e, g[at]){
+		for(auto& e : g[at]){
 			if (e.first == par) continue;
 			tie(sz, ch) = dfs(e.first, at, g, d+1);
 			V[e.first].val = e.second;

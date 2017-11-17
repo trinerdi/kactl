@@ -25,7 +25,7 @@ vector<pii> antipodal(const vector<P>& S, vi& U, vi& L) {
 pii polygonDiameter(const vector<P>& S) {
 	vi U, L; tie(U, L) = ulHull(S);
 	pair<ll, pii> ans;
-	trav(x, antipodal(S, U, L))
+	for(auto& x : antipodal(S, U, L))
 		ans = max(ans, {(S[x.first] - S[x.second]).dist2(), x});
 	return ans.second;
 }
