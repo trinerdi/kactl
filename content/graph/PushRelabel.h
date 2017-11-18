@@ -20,7 +20,7 @@ struct PushRelabel {
 	vector<vector<Edge>> g;
 	vector<Flow> ec;
 	vector<Edge*> cur;
-	vector<vi> hs; vi H;
+	vector<vector<int>> hs; vector<int> H;
 	PushRelabel(int n) : g(n), ec(n), cur(n), hs(2*n), H(n) {}
 
 	void add_edge(int s, int t, Flow cap, Flow rcap=0) {
@@ -39,7 +39,7 @@ struct PushRelabel {
 	}
 	Flow maxflow(int s, int t) {
 		int v = g.size(); H[s] = v; ec[t] = 1;
-		vi co(2*v); co[0] = v-1;
+		vector<int> co(2*v); co[0] = v-1;
 		rep(i,0,v) cur[i] = g[i].data();
 		for(auto& e : g[s]) add_flow(e, e.c);
 

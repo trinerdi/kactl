@@ -14,9 +14,9 @@
 
 #include "LCA.h"
 
-vpi compressTree(LCA& lca, const vi& subset) {
-	static vi rev; rev.resize(lca.dist.size());
-	vi li = subset, &T = lca.time;
+vpi compressTree(LCA& lca, const vector<int>& subset) {
+	static vector<int> rev; rev.resize(lca.dist.size());
+	vector<int> li = subset, &T = lca.time;
 	auto cmp = [&](int a, int b) { return T[a] < T[b]; };
 	sort(li.begin(), li.end(), cmp);
 	int m = li.size()-1;
@@ -27,7 +27,7 @@ vpi compressTree(LCA& lca, const vi& subset) {
 	sort(li.begin(), li.end(), cmp);
 	li.erase(unique(li.begin(), li.end()), li.end());
 	rep(i,0,li.size()) rev[li[i]] = i;
-	vpi ret = {pii(0, li[0])};
+	vpi ret = {pair<int,int>(0, li[0])};
 	rep(i,0,li.size()-1) {
 		int a = li[i], b = li[i+1];
 		ret.emplace_back(rev[lca.query(a, b)], b);

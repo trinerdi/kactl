@@ -11,19 +11,19 @@
 #pragma once
 
 struct V {
-	vector<pii> outs; // (dest, edge index)
+	vector<pair<int,int>> outs; // (dest, edge index)
 	int nins = 0;
 };
 
-vi euler_walk(vector<V>& nodes, int nedges, int src=0) {
+vector<int> euler_walk(vector<V>& nodes, int nedges, int src=0) {
 	int c = 0;
 	for(auto& n : nodes) c += abs(n.nins - n.outs.size());
 	if (c > 2) return {};
-	vector<vector<pii>::iterator> its;
+	vector<vector<pair<int,int>>::iterator> its;
 	for(auto& n : nodes)
 		its.push_back(n.outs.begin());
 	vector<bool> eu(nedges);
-	vi ret, s = {src};
+	vector<int> ret, s = {src};
 	while(!s.empty()) {
 		int x = s.back();
 		auto& it = its[x], end = nodes[x].outs.end();

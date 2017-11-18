@@ -14,7 +14,7 @@ struct Tree {
 	T f(T a, T b) { return max(a, b); }
 
 	int n;
-	vi s;
+	vector<int> s;
 	Tree() {}
 	Tree(int m, T def=0) { init(m, def); }
 	void init(int m, T def) {

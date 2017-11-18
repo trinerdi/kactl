@@ -23,7 +23,7 @@ void count_sort(vector<pli> &b, int bits) { // (optional)
 	int mask = (1 << bits) - 1;
 	rep(it,0,2) {
 		int move = it * bits;
-		vi q(1 << bits), w(q.size() + 1);
+		vector<int> q(1 << bits), w(q.size() + 1);
 		rep(i,0,b.size())
 			q[(b[i].first >> move) & mask]++;
 		partial_sum(q.begin(), q.end(), w.begin() + 1);
@@ -34,7 +34,7 @@ void count_sort(vector<pli> &b, int bits) { // (optional)
 	}
 }
 struct SuffixArray {
-	vi a;
+	vector<int> a;
 	string s;
 	SuffixArray(const string& _s) : s(_s + '\0') {
 		int N = s.size();
@@ -64,10 +64,10 @@ struct SuffixArray {
 		}
 		rep(i,0,a.size()) a[i] = b[i].second;
 	}
-	vi lcp() {
+	vector<int> lcp() {
 		// longest common prefixes: res[i] = lcp(a[i], a[i-1])
 		int n = a.size(), h = 0;
-		vi inv(n), res(n);
+		vector<int> inv(n), res(n);
 		rep(i,0,n) inv[a[i]] = i;
 		rep(i,0,n) if (inv[i] > 0) {
 			int p0 = a[inv[i] - 1];

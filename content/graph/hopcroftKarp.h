@@ -5,13 +5,13 @@
  * Source: N/A
  * Description: Find a maximum matching in a bipartite graph.
  * Status: Tested on oldkattis.adkbipmatch and SPOJ:MATCHING
- * Usage: vi ba(m, -1); hopcroftKarp(g, ba);
+ * Usage: vector<int> ba(m, -1); hopcroftKarp(g, ba);
  * Time: O(\sqrt{V}E)
  */
 #pragma once
 
-bool dfs(int a, int layer, const vector<vi>& g, vi& btoa,
-			vi& A, vi& B) {
+bool dfs(int a, int layer, const vector<vector<int>>& g, vector<int>& btoa,
+			vector<int>& A, vector<int>& B) {
 	if (A[a] != layer) return 0;
 	A[a] = -1;
 	for(auto& b : g[a]) if (B[b] == layer + 1) {
@@ -22,9 +22,9 @@ bool dfs(int a, int layer, const vector<vi>& g, vi& btoa,
 	return 0;
 }
 
-int hopcroftKarp(const vector<vi>& g, vi& btoa) {
+int hopcroftKarp(const vector<vector<int>>& g, vector<int>& btoa) {
 	int res = 0;
-	vi A(g.size()), B(btoa.size()), cur, next;
+	vector<int> A(g.size()), B(btoa.size()), cur, next;
 	for (;;) {
 		fill(A.begin(), A.end(), 0);
 		fill(B.begin(), B.end(), -1);

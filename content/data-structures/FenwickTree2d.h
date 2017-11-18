@@ -12,7 +12,7 @@
 #include "FenwickTree.h"
 
 struct FT2 {
-	vector<vi> ys; vector<FT> ft;
+	vector<vector<int>> ys; vector<FT> ft;
 	FT2(int limx) : ys(limx) {}
 	void fakeUpdate(int x, int y) {
 		for (; x < ys.size(); x |= x + 1) ys[x].push_back(y);

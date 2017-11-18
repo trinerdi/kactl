@@ -6,12 +6,12 @@
  * Time: O(pattern) for pi, O(word + pattern) for find
  * Status: Tested on Kattis, stringmatching
  * Usage:
- *  vi p = pi(pattern); vi occ = find(word, p);
+ *  vector<int> p = pi(pattern); vector<int> occ = find(word, p);
  */
 #pragma once
 
-vi pi(const string& s) {
-	vi p(s.size());
+vector<int> pi(const string& s) {
+	vector<int> p(s.size());
 	rep(i,1,s.size()) {
 		int g = p[i-1];
 		while (g && s[i] != s[g]) g = p[g-1];
@@ -20,8 +20,8 @@ vi pi(const string& s) {
 	return p;
 }
 
-vi match(const string& s, const string& pat) {
-	vi p = pi(pat + '\0' + s), res;
+vector<int> match(const string& s, const string& pat) {
+	vector<int> p = pi(pat + '\0' + s), res;
 	rep(i,p.size()-s.size(),p.size())
 		if (p[i] == pat.size()) res.push_back(i - 2 * pat.size());
 	return res;

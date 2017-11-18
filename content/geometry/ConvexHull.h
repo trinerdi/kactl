@@ -24,8 +24,8 @@ Points on the edge of the hull between two other points are not considered part 
 #include "Point.h"
 
 typedef Point<ll> P;
-pair<vi, vi> ulHull(const vector<P>& S) {
-	vi Q(S.size()), U, L;
+pair<vector<int>, vector<int>> ulHull(const vector<P>& S) {
+	vector<int> Q(S.size()), U, L;
 	iota(Q.begin(), Q.end(), 0);
 	sort(Q.begin(), Q.end(), [&S](int a, int b){ return S[a] < S[b]; });
 	for(auto& it : Q) {
@@ -36,8 +36,8 @@ pair<vi, vi> ulHull(const vector<P>& S) {
 	return {U, L}; 
 }
 
-vi convexHull(const vector<P>& S) {
-	vi u, l; tie(u, l) = ulHull(S);
+vector<int> convexHull(const vector<P>& S) {
+	vector<int> u, l; tie(u, l) = ulHull(S);
 	if (S.size() <= 1) return u;
 	if (S[u[0]] == S[u[1]]) return {0};
 	l.insert(l.end(), u.rbegin()+1, u.rend()-1);

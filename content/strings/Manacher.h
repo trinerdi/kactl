@@ -10,7 +10,7 @@
 
 void manacher(const string& s) {
 	int n = s.size();
-	vi p[2] = {vi(n+1), vi(n)};
+	vector<int> p[2] = {vector<int>(n+1), vector<int>(n)};
 	rep(z,0,2) for (int i=0,l=0,r=0; i < n; i++) {
 		int t = r-i+!z;
 		if (i<r) p[z][i] = min(t, p[z][l+t]);

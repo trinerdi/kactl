@@ -47,6 +47,6 @@ vector<ull> factor(ull d) {
 	return res;
 }
 void init(int bits) {//how many bits do we use?
-	vi p = eratosthenes_sieve(1 << ((bits + 2) / 3));
+	vector<int> p = eratosthenes_sieve(1 << ((bits + 2) / 3));
 	pr.assign(p.begin(), p.end());
 }

@@ -59,9 +59,9 @@ struct AhoCorasick {
 			}
 		}
 	}
-	vi find(string word) {
+	vector<int> find(string word) {
 		int n = 0;
-		vi res; // ll count = 0;
+		vector<int> res; // ll count = 0;
 		for(auto& c : word) {
 			n = N[n].next[c - first];
 			res.push_back(N[n].end);
@@ -69,9 +69,9 @@ struct AhoCorasick {
 		}
 		return res;
 	}
-	vector<vi> findAll(vector<string>& pat, string word) {
-		vi r = find(word);
-		vector<vi> res(word.size());
+	vector<vector<int>> findAll(vector<string>& pat, string word) {
+		vector<int> r = find(word);
+		vector<vector<int>> res(word.size());
 		rep(i,0,word.size()) {
 			int ind = r[i];
 			while (ind != -1) {

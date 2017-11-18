@@ -11,7 +11,7 @@
 #pragma once
 
 int matInv(vector<vector<double>>& A) {
-	int n = A.size(); vi col(n);
+	int n = A.size(); vector<int> col(n);
 	vector<vector<double>> tmp(n, vector<double>(n));
 	rep(i,0,n) tmp[i][i] = 1, col[i] = i;
 

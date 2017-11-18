@@ -8,13 +8,13 @@
  */
 #pragma once
 
-pair<int, vi> GetMinCut(vector<vi>& weights) {
+pair<int, vector<int>> GetMinCut(vector<vector<int>>& weights) {
 	int N = weights.size();
-	vi used(N), cut, best_cut;
+	vector<int> used(N), cut, best_cut;
 	int best_weight = -1;
 
 	for (int phase = N-1; phase >= 0; phase--) {
-		vi w = weights[0], added = used;
+		vector<int> w = weights[0], added = used;
 		int prev, k = 0;
 		rep(i,0,phase){
 			prev = k;

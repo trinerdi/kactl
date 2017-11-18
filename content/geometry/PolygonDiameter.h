@@ -10,8 +10,8 @@
 
 #include "ConvexHull.h"
 
-vector<pii> antipodal(const vector<P>& S, vi& U, vi& L) {
-	vector<pii> ret;
+vector<pair<int,int>> antipodal(const vector<P>& S, vector<int>& U, vector<int>& L) {
+	vector<pair<int,int>> ret;
 	int i = 0, j = L.size() - 1;
 	while (i < U.size() - 1 || j > 0) {
 		ret.emplace_back(U[i], L[j]);
@@ -22,9 +22,9 @@ vector<pii> antipodal(const vector<P>& S, vi& U, vi& L) {
 	return ret;
 }
 
-pii polygonDiameter(const vector<P>& S) {
-	vi U, L; tie(U, L) = ulHull(S);
-	pair<ll, pii> ans;
+pair<int,int> polygonDiameter(const vector<P>& S) {
+	vector<int> U, L; tie(U, L) = ulHull(S);
+	pair<ll, pair<int,int>> ans;
 	for(auto& x : antipodal(S, U, L))
 		ans = max(ans, {(S[x.first] - S[x.second]).dist2(), x});
 	return ans.second;

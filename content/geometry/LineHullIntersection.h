@@ -69,7 +69,7 @@ struct HullIntersection {
 		return lo;
 	}
 
-	pii isct(P a, P b) {
+	pair<int,int> isct(P a, P b) {
 		int f = bs(a - b), j = bs(b - a);
 		if (isign(a, b, f, j, 1)) return {-1, -1};
 		int x = bs2(f, j, a, b)%N,

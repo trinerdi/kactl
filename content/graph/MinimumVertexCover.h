@@ -11,12 +11,12 @@
 
 #include "DFSMatching.h"
 
-vi cover(vector<vi>& g, int n, int m) {
+vector<int> cover(vector<vector<int>>& g, int n, int m) {
 	int res = dfs_matching(g, n, m);
 	seen.assign(m, false);
 	vector<bool> lfound(n, true);
 	for(auto& it : match) if (it != -1) lfound[it] = false;
-	vi q, cover;
+	vector<int> q, cover;
 	rep(i,0,n) if (lfound[i]) q.push_back(i);
 	while (!q.empty()) {
 		int i = q.back(); q.pop_back();

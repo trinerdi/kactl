@@ -12,7 +12,7 @@
 
 template <class E, class I>
 bool topo_sort(const E &edges, I &idx, int n) {
-	vi indeg(n);
+	vector<int> indeg(n);
 	rep(i,0,n)
 		for(auto& e : edges[i])
 			indeg[e]++;

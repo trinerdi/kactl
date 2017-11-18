@@ -17,8 +17,8 @@
 
 struct TwoSat {
 	int N;
-	vector<vi> gr;
-	vi values; // 0 = false, 1 = true
+	vector<vector<int>> gr;
+	vector<int> values; // 0 = false, 1 = true
 
 	TwoSat(int n = 0) : N(n), gr(2*n) {}
 
@@ -36,7 +36,7 @@ struct TwoSat {
 	}
 	void set_value(int x) { either(x, x); }
 
-	void at_most_one(const vi& li) { // (optional)
+	void at_most_one(const vector<int>& li) { // (optional)
 		if (li.size() <= 1) return;
 		int cur = ~li[0];
 		rep(i,2,li.size()) {
@@ -49,7 +49,7 @@ struct TwoSat {
 		either(cur, ~li[1]);
 	}
 
-	vi val, comp, z; int time = 0;
+	vector<int> val, comp, z; int time = 0;
 	int dfs(int i) {
 		int low = val[i] = ++time, x; z.push_back(i);
 		for(auto& e : gr[i]) if (!comp[e])

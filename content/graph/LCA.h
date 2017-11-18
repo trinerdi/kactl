@@ -16,17 +16,17 @@
  */
 #pragma once
 
-typedef vector<pii> vpi;
+typedef vector<pair<int,int>> vpi;
 typedef vector<vpi> graph;
-const pii inf(1 << 29, -1);
+const pair<int,int> inf(1 << 29, -1);
 
 #define RMQ_HAVE_INF /** exclude-line */
 #include "../data-structures/RMQ.h"
 
 struct LCA {
-	vi time;
+	vector<int> time;
 	vector<ll> dist;
-	RMQ<pii> rmq;
+	RMQ<pair<int,int>> rmq;
 
 	LCA(graph& C) : time(C.size(), -99), dist(C.size()), rmq(dfs(C)) {}
 

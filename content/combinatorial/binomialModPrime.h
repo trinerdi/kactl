@@ -12,7 +12,7 @@
  */
 #pragma once
 
-ll chooseModP(ll n, ll m, int p, vi& fact, vi& invfact) {
+ll chooseModP(ll n, ll m, int p, vector<int>& fact, vector<int>& invfact) {
 	ll c = 1;
 	while (n || m) {
 		ll a = n % p, b = m % p;

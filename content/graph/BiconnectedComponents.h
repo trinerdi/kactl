@@ -15,12 +15,12 @@
  *  for each edge (a,b) {
  *    ed[a].emplace_back(b, eid);
  *    ed[b].emplace_back(a, eid++); }
- *  bicomps([\&](const vi\& edgelist) {...});
+ *  bicomps([\&](const vector<int>\& edgelist) {...});
  */
 #pragma once
 
-vi num, st;
-vector<vector<pii>> ed;
+vector<int> num, st;
+vector<vector<pair<int,int>>> ed;
 int Time;
 template<class F>
 int dfs(int at, int par, F f) {
@@ -37,7 +37,7 @@ int dfs(int at, int par, F f) {
 			top = min(top, up);
 			if (up == me) {
 				st.push_back(e);
-				f(vi(st.begin() + si, st.end()));
+				f(vector<int>(st.begin() + si, st.end()));
 				st.resize(si);
 			}
 			else if (up < me)

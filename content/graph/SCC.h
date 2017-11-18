@@ -8,14 +8,14 @@
  * we can reach $u$ from $v$ and vice versa.
  * Time: O(E + V)
  * Status: Bruteforce-tested for N <= 5
- * Usage: scc(graph, [\&](vi\& v) { ... }) visits all components
+ * Usage: scc(graph, [\&](vector<int>\& v) { ... }) visits all components
  * in reverse topological order. comp[i] holds the component
  * index of a node (a component only has edges to components with
  * lower index). ncomps will contain the number of components.
  */
 #pragma once
 
-vi val, comp, z, cont;
+vector<int> val, comp, z, cont;
 int Time, ncomps;
 template<class G, class F> int dfs(int j, G& g, F f) {
 	int low = val[j] = ++Time, x; z.push_back(j);

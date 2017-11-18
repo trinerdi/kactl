@@ -17,11 +17,11 @@ typedef vector<ll> VL;
 
 struct MCMF {
 	int N;
-	vector<vi> ed, red;
+	vector<vector<int>> ed, red;
 	vector<VL> cap, flow, cost;
-	vi seen;
+	vector<int> seen;
 	VL dist, pi;
-	vector<pii> par;
+	vector<pair<int,int>> par;
 
 	MCMF(int N) :
 		N(N), ed(N), red(N), cap(N, VL(N)), flow(cap), cost(cap),

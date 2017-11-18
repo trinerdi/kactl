@@ -15,9 +15,9 @@
  */
 #pragma once
 
-vi match;
+vector<int> match;
 vector<bool> seen;
-bool find(int j, const vector<vi>& g) {
+bool find(int j, const vector<vector<int>>& g) {
 	if (match[j] == -1) return 1;
 	seen[j] = 1; int di = match[j];
 	for(auto& e : g[di])
@@ -27,7 +27,7 @@ bool find(int j, const vector<vi>& g) {
 		}
 	return 0;
 }
-int dfs_matching(const vector<vi>& g, int n, int m) {
+int dfs_matching(const vector<vector<int>>& g, int n, int m) {
 	match.assign(m, -1);
 	rep(i,0,n) {
 		seen.assign(m, 0);

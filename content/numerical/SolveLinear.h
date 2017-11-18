@@ -15,7 +15,7 @@ const double eps = 1e-12;
 int solveLinear(vector<vd>& A, vd& b, vd& x) {
 	int n = A.size(), m = x.size(), rank = 0, br, bc;
 	if (n) assert(A[0].size() == m);
-	vi col(m); iota(col.begin(), col.end(), 0);
+	vector<int> col(m); iota(col.begin(), col.end(), 0);
 
 	rep(i,0,n) {
 		double v, bv = 0;

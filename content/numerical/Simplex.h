@@ -24,7 +24,7 @@ const T eps = 1e-8, inf = 1/.0;
 
 struct LPSolver {
 	int m, n;
-	vi N, B;
+	vector<int> N, B;
 	vvd D;
 
 	LPSolver(const vvd& A, const vd& b, const vd& c) :
