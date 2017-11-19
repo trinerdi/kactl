@@ -37,16 +37,16 @@ struct SuffixTree {
 	}
 
 	SuffixTree(string a) : a(a) {
-		fill(r,r+N,sz(a));
+		fill(r,r+N,a.size());
 		memset(s, 0, sizeof s);
 		memset(t, -1, sizeof t);
 		fill(t[1],t[1]+ALPHA,0);
 		s[0] = 1; l[0] = l[1] = -1; r[0] = r[1] = p[0] = p[1] = 0;
-		rep(i,0,sz(a)) ukkadd(i, toi(a[i]));
+		rep(i,0,a.size()) ukkadd(i, toi(a[i]));
 	}
 
 	// example: find longest common substring (uses ALPHA = 28)
-	pii best;
+	pair<int,int> best;
 	int lcs(int node, int i1, int i2, int olen) {
 		if (l[node] <= i1 && i1 < r[node]) return 1;
 		if (l[node] <= i2 && i2 < r[node]) return 2;
@@ -57,9 +57,9 @@ struct SuffixTree {
 			best = max(best, {len, r[node] - len});
 		return mask;
 	}
-	static pii LCS(string s, string t) {
+	static pair<int,int> LCS(string s, string t) {
 		SuffixTree st(s + (char)('z' + 1) + t + (char)('z' + 2));
-		st.lcs(0, sz(s), sz(s) + 1 + sz(t), 0);
+		st.lcs(0, s.size(), s.size() + 1 + t.size(), 0);
 		return st.best;
 	}
 };

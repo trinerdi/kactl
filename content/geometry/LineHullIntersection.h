@@ -27,8 +27,8 @@ struct HullIntersection {
 	vector<P> p;
 	vector<pair<P, int>> a;
 
-	HullIntersection(const vector<P>& ps) : N(sz(ps)), p(ps) {
-		p.insert(p.end(), all(ps));
+	HullIntersection(const vector<P>& ps) : N(ps.size()), p(ps) {
+		p.insert(p.end(), ps.begin(), ps.end());
 		int b = 0;
 		rep(i,1,N) if (P{p[i].y,p[i].x} < P{p[b].y, p[b].x}) b = i;
 		rep(i,0,N) {
@@ -69,7 +69,7 @@ struct HullIntersection {
 		return lo;
 	}
 
-	pii isct(P a, P b) {
+	pair<int,int> isct(P a, P b) {
 		int f = bs(a - b), j = bs(b - a);
 		if (isign(a, b, f, j, 1)) return {-1, -1};
 		int x = bs2(f, j, a, b)%N,

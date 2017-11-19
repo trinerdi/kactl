@@ -32,18 +32,18 @@ void ntt(ll* x, ll* temp, ll* roots, int N, int skip) {
 	}
 }
 void ntt(vl& x, bool inv = false) {
-	ll e = modpow(root, (mod-1) / sz(x));
+	ll e = modpow(root, (mod-1) / x.size());
 	if (inv) e = modpow(e, mod-2);
-	vl roots(sz(x), 1), temp = roots;
-	rep(i,1,sz(x)) roots[i] = roots[i-1] * e % mod;
-	ntt(&x[0], &temp[0], &roots[0], sz(x), 1);
+	vl roots(x.size(), 1), temp = roots;
+	rep(i,1,x.size()) roots[i] = roots[i-1] * e % mod;
+	ntt(&x[0], &temp[0], &roots[0], x.size(), 1);
 }
 vl conv(vl a, vl b) {
-	int s = sz(a) + sz(b) - 1; if (s <= 0) return {};
+	int s = a.size() + b.size() - 1; if (s <= 0) return {};
 	int L = s > 1 ? 32 - __builtin_clz(s - 1) : 0, n = 1 << L;
 	if (s <= 200) { // (factor 10 optimization for |a|,|b| = 10)
 		vl c(s);
-		rep(i,0,sz(a)) rep(j,0,sz(b))
+		rep(i,0,a.size()) rep(j,0,b.size())
 			c[i + j] = (c[i + j] + a[i] * b[j]) % mod;
 		return c;
 	}

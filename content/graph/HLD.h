@@ -17,7 +17,7 @@
 
 #include "../data-structures/SegmentTree.h"
 
-typedef vector<pii> vpi;
+typedef vector<pair<int,int>> vpi;
 
 struct Node {
 	int d, par, val, chain = -1, pos = -1;
@@ -37,10 +37,10 @@ struct HLD {
 	vector<Node> V;
 	vector<Chain> C;
 
-	HLD(vector<vpi>& g) : V(sz(g)) {
+	HLD(vector<vpi>& g) : V(g.size()) {
 		dfs(0, -1, g, 0);
-		trav(c, C){
-			c.tree.init(sz(c.nodes), 0);
+		for(auto& c : C){
+			c.tree.init(c.nodes.size(), 0);
 			for (int ni : c.nodes)
 				c.tree.update(V[ni].pos, V[ni].val);
 		}
@@ -73,7 +73,7 @@ struct HLD {
 					f(ans, n1.val), i1 = n1.par;
 				else {
 					Chain& c = C[n1.chain];
-					f(ans, n1.pos ? c.tree.query(n1.pos, sz(c.nodes))
+					f(ans, n1.pos ? c.tree.query(n1.pos, c.nodes.size())
 					              : c.tree.s[1]);
 					i1 = c.par;
 				}
@@ -89,11 +89,11 @@ struct HLD {
 		return ans;
 	}
 
-	pii dfs(int at, int par, vector<vpi>& g, int d) {
+	pair<int,int> dfs(int at, int par, vector<vpi>& g, int d) {
 		V[at].d = d; V[at].par = par;
 		int sum = 1, ch, nod, sz;
 		tuple<int,int,int> mx(-1,-1,-1);
-		trav(e, g[at]){
+		for(auto& e : g[at]){
 			if (e.first == par) continue;
 			tie(sz, ch) = dfs(e.first, at, g, d+1);
 			V[e.first].val = e.second;
@@ -101,12 +101,12 @@ struct HLD {
 			mx = max(mx, make_tuple(sz, e.first, ch));
 		}
 		tie(sz, nod, ch) = mx;
-		if (2*sz < sum) return pii(sum, -1);
-		if (ch == -1) { ch = sz(C); C.emplace_back(); }
-		V[nod].pos = sz(C[ch].nodes);
+		if (2*sz < sum) return pair<int,int>(sum, -1);
+		if (ch == -1) { ch = C.size(); C.emplace_back(); }
+		V[nod].pos = C[ch].nodes.size();
 		V[nod].chain = ch;
 		C[ch].par = at;
 		C[ch].nodes.push_back(nod);
-		return pii(sum, ch);
+		return pair<int,int>(sum, ch);
 	}
 };

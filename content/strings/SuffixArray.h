@@ -23,21 +23,21 @@ void count_sort(vector<pli> &b, int bits) { // (optional)
 	int mask = (1 << bits) - 1;
 	rep(it,0,2) {
 		int move = it * bits;
-		vi q(1 << bits), w(sz(q) + 1);
-		rep(i,0,sz(b))
+		vector<int> q(1 << bits), w(q.size() + 1);
+		rep(i,0,b.size())
 			q[(b[i].first >> move) & mask]++;
 		partial_sum(q.begin(), q.end(), w.begin() + 1);
 		vector<pli> res(b.size());
-		rep(i,0,sz(b))
+		rep(i,0,b.size())
 			res[w[(b[i].first >> move) & mask]++] = b[i];
 		swap(b, res);
 	}
 }
 struct SuffixArray {
-	vi a;
+	vector<int> a;
 	string s;
 	SuffixArray(const string& _s) : s(_s + '\0') {
-		int N = sz(s);
+		int N = s.size();
 		vector<pli> b(N);
 		a.resize(N);
 		rep(i,0,N) {
@@ -48,7 +48,7 @@ struct SuffixArray {
 		int q = 8;
 		while ((1 << q) < N) q++;
 		for (int moc = 0;; moc++) {
-			count_sort(b, q); // sort(all(b)) can be used as well
+			count_sort(b, q); // sort(b.begin(), b.end()) can be used as well
 			a[b[0].second] = 0;
 			rep(i,1,N)
 				a[b[i].second] = a[b[i - 1].second] +
@@ -62,12 +62,12 @@ struct SuffixArray {
 				b[i].second = i;
 			}
 		}
-		rep(i,0,sz(a)) a[i] = b[i].second;
+		rep(i,0,a.size()) a[i] = b[i].second;
 	}
-	vi lcp() {
+	vector<int> lcp() {
 		// longest common prefixes: res[i] = lcp(a[i], a[i-1])
-		int n = sz(a), h = 0;
-		vi inv(n), res(n);
+		int n = a.size(), h = 0;
+		vector<int> inv(n), res(n);
 		rep(i,0,n) inv[a[i]] = i;
 		rep(i,0,n) if (inv[i] > 0) {
 			int p0 = a[inv[i] - 1];

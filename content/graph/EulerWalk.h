@@ -11,19 +11,19 @@
 #pragma once
 
 struct V {
-	vector<pii> outs; // (dest, edge index)
+	vector<pair<int,int>> outs; // (dest, edge index)
 	int nins = 0;
 };
 
-vi euler_walk(vector<V>& nodes, int nedges, int src=0) {
+vector<int> euler_walk(vector<V>& nodes, int nedges, int src=0) {
 	int c = 0;
-	trav(n, nodes) c += abs(n.nins - sz(n.outs));
+	for(auto& n : nodes) c += abs(n.nins - n.outs.size());
 	if (c > 2) return {};
-	vector<vector<pii>::iterator> its;
-	trav(n, nodes)
+	vector<vector<pair<int,int>>::iterator> its;
+	for(auto& n : nodes)
 		its.push_back(n.outs.begin());
 	vector<bool> eu(nedges);
-	vi ret, s = {src};
+	vector<int> ret, s = {src};
 	while(!s.empty()) {
 		int x = s.back();
 		auto& it = its[x], end = nodes[x].outs.end();
@@ -31,9 +31,9 @@ vi euler_walk(vector<V>& nodes, int nedges, int src=0) {
 		if(it == end) { ret.push_back(x); s.pop_back(); }
 		else { s.push_back(it->first); eu[it->second] = true; }
 	}
-	if(sz(ret) != nedges+1)
+	if(ret.size() != nedges+1)
 		ret.clear(); // No Eulerian cycles/paths.
 	// else, non-cycle if ret.front() != ret.back()
-	reverse(all(ret));
+	reverse(ret.begin(), ret.end());
 	return ret;
 }

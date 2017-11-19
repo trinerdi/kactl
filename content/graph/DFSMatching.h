@@ -15,27 +15,27 @@
  */
 #pragma once
 
-vi match;
+vector<int> match;
 vector<bool> seen;
-bool find(int j, const vector<vi>& g) {
+bool find(int j, const vector<vector<int>>& g) {
 	if (match[j] == -1) return 1;
 	seen[j] = 1; int di = match[j];
-	trav(e, g[di])
+	for(auto& e : g[di])
 		if (!seen[e] && find(e, g)) {
 			match[e] = di;
 			return 1;
 		}
 	return 0;
 }
-int dfs_matching(const vector<vi>& g, int n, int m) {
+int dfs_matching(const vector<vector<int>>& g, int n, int m) {
 	match.assign(m, -1);
 	rep(i,0,n) {
 		seen.assign(m, 0);
-		trav(j,g[i])
+		for(auto& j :g[i])
 			if (find(j, g)) {
 				match[j] = i;
 				break;
 			}
 	}
-	return m - (int)count(all(match), -1);
+	return m - (int)count(match.begin(), match.end(), -1);
 }

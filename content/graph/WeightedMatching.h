@@ -10,10 +10,10 @@
 
 typedef vector<double> vd;
 bool zero(double x) { return fabs(x) < 1e-10; }
-double MinCostMatching(const vector<vd>& cost, vi& L, vi& R) {
-	int n = sz(cost), mated = 0;
+double MinCostMatching(const vector<vd>& cost, vector<int>& L, vector<int>& R) {
+	int n = cost.size(), mated = 0;
 	vd dist(n), u(n), v(n);
-	vi dad(n), seen(n);
+	vector<int> dad(n), seen(n);
 
 	/// construct dual feasible solution
 	rep(i,0,n) {
@@ -26,7 +26,7 @@ double MinCostMatching(const vector<vd>& cost, vi& L, vi& R) {
 	}
 
 	/// find primal solution satisfying complementary slackness
-	L = R = vi(n, -1);
+	L = R = vector<int>(n, -1);
 	rep(i,0,n) rep(j,0,n) {
 		if (R[j] != -1) continue;
 		if (zero(cost[i][j] - u[i] - v[j])) {
@@ -40,8 +40,8 @@ double MinCostMatching(const vector<vd>& cost, vi& L, vi& R) {
 	for (; mated < n; mated++) { // until solution is feasible
 		int s = 0;
 		while (L[s] != -1) s++;
-		fill(all(dad), -1);
-		fill(all(seen), 0);
+		fill(dad.begin(), dad.end(), -1);
+		fill(seen.begin(), seen.end(), 0);
 		rep(k,0,n)
 			dist[k] = cost[s][k] - u[s] - v[k];
 

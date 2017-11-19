@@ -30,12 +30,12 @@ pair<double, P> mec(vector<P>& S, P a, int n) {
 	P b = S[0], c = (a + b) / 2;
 	double r = (a - c).dist2();
 	rep(i,1,n) if ((S[i] - c).dist2() > r * (1 + 1e-8)) {
-		tie(r,c) = (n == sz(S) ?
+		tie(r,c) = (n == S.size() ?
 			mec(S, S[i], i) : mec2(S, a, S[i], i));
 	}
 	return {r, c};
 }
 pair<double, P> enclosingCircle(vector<P> S) {
-	assert(!S.empty()); auto r = mec(S, S[0], sz(S));
+	assert(!S.empty()); auto r = mec(S, S[0], S.size());
 	return {sqrt(r.first), r.second};
 }
